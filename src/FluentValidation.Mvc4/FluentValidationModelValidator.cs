@@ -45,14 +45,20 @@ namespace FluentValidation.Mvc {
 					return ConvertValidationResultToModelValidationResults(result);
 				}
 			}
-			return Enumerable.Empty<ModelValidationResult>();
+			return Enumerable.Empty<CustomModelValidationResult>();
 		}
 
-		protected virtual IEnumerable<ModelValidationResult> ConvertValidationResultToModelValidationResults(ValidationResult result) {
-			return result.Errors.Select(x => new ModelValidationResult {
+		protected virtual IEnumerable<CustomModelValidationResult> ConvertValidationResultToModelValidationResults(ValidationResult result) {
+			return result.Errors.Select(x => new CustomModelValidationResult
+            {
 				MemberName = x.PropertyName,
-				Message = x.ErrorMessage
-			});
+				Message = x.ErrorMessage,
+                CustomState = x.CustomState
+            });
 		}
 	}
+
+    public class CustomModelValidationResult : ModelValidationResult {
+        public object CustomState { get; set; }
+    }
 }
