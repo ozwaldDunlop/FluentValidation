@@ -1,7 +1,6 @@
 namespace FluentValidation.Internal {
 	using System;
 	using System.Linq;
-	using System.Linq.Expressions;
 	using Validators;
 
 	/// <summary>
@@ -17,7 +16,13 @@ namespace FluentValidation.Internal {
 			this.rulesetsToExecute = rulesetsToExecute;
 		}
 
-		/// <summary>
+	    public string[] RulesetsToExecute
+	    {
+	        get { return rulesetsToExecute; }
+	    }
+
+
+	    /// <summary>
 		/// Determines whether or not a rule should execute.
 		/// </summary>
 		/// <param name="rule">The rule</param>
